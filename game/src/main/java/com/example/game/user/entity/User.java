@@ -30,7 +30,7 @@ public class User {
     private LocalDateTime lastAccessDate;
 
     @Embedded
-    private UserGameInfo userGameInfo;
+    private UserGameInfo userGameInfo = new UserGameInfo();
 
 
     public User(String email, Long kakaoId, String username, String password) {
