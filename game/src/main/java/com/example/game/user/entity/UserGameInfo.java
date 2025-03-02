@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserGameInfo {
     private int maxChicken;
+    private int chickenCount;
     private int maxItem;
     private int money;
     private int eggCount;

@@ -8,6 +8,7 @@ public class UserInfoResponseDto {
     private String username;
     private int money;
     private int maxChicken;
+    private int chickenCount;
     private int eggCount;
 
     public UserInfoResponseDto(User user) {
@@ -15,5 +16,6 @@ public class UserInfoResponseDto {
         this.money = user.getUserGameInfo().getMoney();
         this.maxChicken = user.getUserGameInfo().getMaxChicken();
         this.eggCount = user.getUserGameInfo().getEggCount();
+        this.chickenCount = user.getUserGameInfo().getChickenCount();
     }
 }
