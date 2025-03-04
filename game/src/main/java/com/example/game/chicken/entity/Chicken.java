@@ -15,5 +15,6 @@ public class Chicken {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long chickenId;
 
+    private String chickenName;
     private int maxCapacity;
 }

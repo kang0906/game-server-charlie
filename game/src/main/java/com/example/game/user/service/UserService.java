@@ -1,5 +1,9 @@
 package com.example.game.user.service;
 
+import com.example.game.chicken.entity.Chicken;
+import com.example.game.chicken.entity.UserChicken;
+import com.example.game.chicken.repository.ChickenRepository;
+import com.example.game.chicken.repository.UserChickenRepository;
 import com.example.game.common.exception.ErrorCode;
 import com.example.game.common.exception.GlobalException;
 import com.example.game.system.value.service.GameSystemValueService;
@@ -23,6 +27,8 @@ import static com.example.game.common.exception.ErrorCode.DATA_NOT_FOUND;
 @Transactional(readOnly = true)
 public class UserService {
     private final UserRepository userRepository;
+    private final UserChickenRepository userChickenRepository;
+    private final ChickenRepository chickenRepository;
     private final GameSystemValueService gameSystemValueService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -38,6 +44,11 @@ public class UserService {
             );
 
             userRepository.save(user);
+
+            Chicken chicken = chickenRepository.findById(1L)
+                    .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
+            UserChicken newUserChicken = new UserChicken(user, chicken);
+            userChickenRepository.save(newUserChicken);
         } else {
             log.warn("존재하는 아이디 입니다.");
             throw new GlobalException(ErrorCode.EXIST_EMAIL);

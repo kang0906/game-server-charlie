@@ -30,4 +30,11 @@ public class UserChicken {
     private int remainingCapacity;
     private int maxCapacity;
 
+    public UserChicken(User user, Chicken chicken) {
+        this.user = user;
+        this.chicken = chicken;
+        this.lastProduceTime = LocalDateTime.now();
+        this.remainingCapacity = chicken.getMaxCapacity();
+        this.maxCapacity = chicken.getMaxCapacity();
+    }
 }
