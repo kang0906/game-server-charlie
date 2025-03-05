@@ -56,17 +56,13 @@ public class UserService {
     }
 
     public UserInfoResponseDto getMyInfo(User user) {
-        return new UserInfoResponseDto(user);
+        UserChicken userChicken = userChickenRepository.findByUser(user);
+        return new UserInfoResponseDto(user, userChicken);
     }
 
     @Transactional
     public void changeUsername(User user, String newUsername) {
         User findUser = userRepository.findById(user.getUserId()).orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
         findUser.changeUsername(newUsername);
-    }
-    public UserInfoResponseDto findUserInfo(long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
-        return new UserInfoResponseDto(user);
     }
 }

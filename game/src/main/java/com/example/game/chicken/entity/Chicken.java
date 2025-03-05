@@ -17,4 +17,9 @@ public class Chicken {
 
     private String chickenName;
     private int maxCapacity;
+
+    public Chicken(String chickenName, int maxCapacity) {
+        this.chickenName = chickenName;
+        this.maxCapacity = maxCapacity;
+    }
 }

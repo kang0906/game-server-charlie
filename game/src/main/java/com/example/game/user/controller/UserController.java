@@ -27,10 +27,6 @@ public class UserController {
         return ResponseDto.success(userService.getMyInfo(userDetails.getUser()));
     }
 
-    @GetMapping("/user/{userId}/info")
-    public ResponseDto<UserInfoResponseDto> findUserInfo(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable long userId) {
-        return ResponseDto.success(userService.findUserInfo(userId));
-    }
 
     @PostMapping("/user/name")
     public ResponseDto<String> changeUsername(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody @Valid RequestUsernameChange requestDto) {
