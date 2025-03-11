@@ -56,7 +56,7 @@ public class UserService {
     }
 
     public UserInfoResponseDto getMyInfo(User user) {
-        UserChicken userChicken = userChickenRepository.findByUser(user);
+        UserChicken userChicken = userChickenRepository.findTopByUser(user);
         return new UserInfoResponseDto(user, userChicken);
     }
 

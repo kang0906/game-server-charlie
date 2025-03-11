@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface UserChickenRepository extends JpaRepository<UserChicken, Long> {
-    UserChicken findByUser(User user);
+    UserChicken findTopByUser(User user);
     List<UserChicken> findAllByUser(User user);
 }

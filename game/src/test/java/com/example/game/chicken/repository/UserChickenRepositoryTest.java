@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
 class UserChickenRepositoryTest {
@@ -33,7 +31,7 @@ class UserChickenRepositoryTest {
         UserChicken userChicken = userChickenRepository.save(new UserChicken(user, chicken));
 
         // when
-        UserChicken byUser = userChickenRepository.findByUser(user);
+        UserChicken byUser = userChickenRepository.findTopByUser(user);
 
         // then
         Assertions.assertThat(byUser.getUserChickenId()).isEqualTo(userChicken.getUserChickenId());
