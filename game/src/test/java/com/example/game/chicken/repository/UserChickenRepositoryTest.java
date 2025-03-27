@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.tuple;
+
 @SpringBootTest
 @Transactional
 class UserChickenRepositoryTest {
@@ -24,7 +28,7 @@ class UserChickenRepositoryTest {
 
     @DisplayName("User로 UserChicken 조회")
     @Test
-    void findByUserTest() {
+    void findTopByUserTest() {
         // given
         User user = userRepository.save(new User("user-email", 0L, "username", "password"));
         Chicken chicken = chickenRepository.save(new Chicken("test-chicken", 5));
@@ -37,7 +41,28 @@ class UserChickenRepositoryTest {
         Assertions.assertThat(byUser.getUserChickenId()).isEqualTo(userChicken.getUserChickenId());
         Assertions.assertThat(byUser.getUser().getUserId()).isEqualTo(userChicken.getUser().getUserId());
         Assertions.assertThat(byUser.getChicken().getChickenId()).isEqualTo(userChicken.getChicken().getChickenId());
+    }
 
+    @DisplayName("User로 UserChicken 모두 조회")
+    @Test
+    void findAllByUserTest() {
+        // given
+        User user = userRepository.save(new User("user-email", 0L, "username", "password"));
+        Chicken chicken = chickenRepository.save(new Chicken("test-chicken", 5));
+        Chicken chicken2 = chickenRepository.save(new Chicken("test-chicken", 10));
+        UserChicken userChicken = userChickenRepository.save(new UserChicken(user, chicken));
+        UserChicken userChicken2 = userChickenRepository.save(new UserChicken(user, chicken2));
+
+        // when
+        List<UserChicken> byUser = userChickenRepository.findAllByUser(user);
+
+        // then
+        Assertions.assertThat(byUser).hasSize(2)
+                .extracting("user", "chicken")
+                .containsExactlyInAnyOrder(
+                        tuple(user, chicken),
+                        tuple(user, chicken2)
+                );
     }
 
 }
