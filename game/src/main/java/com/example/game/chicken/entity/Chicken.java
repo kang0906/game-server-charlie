@@ -22,10 +22,11 @@ public class Chicken {
     private Item produceItem;
 
     private String chickenName;
-    private int maxCapacity;
+    private int maxEggCapacity;
+    private int eggProduceSpeedSec;
 
-    public Chicken(String chickenName, int maxCapacity) {
+    public Chicken(String chickenName, int maxEggCapacity) {
         this.chickenName = chickenName;
-        this.maxCapacity = maxCapacity;
+        this.maxEggCapacity = maxEggCapacity;
     }
 }

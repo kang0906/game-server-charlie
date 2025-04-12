@@ -7,6 +7,8 @@ import com.example.game.config.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,5 +20,10 @@ public class ChickenController {
     @GetMapping("/chicken")
     public ResponseDto<UserChickenListDto> getChickenList(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return ResponseDto.success(chickenService.getChickenList(userDetails.getUser()));
+    }
+
+    @PostMapping("/chicken/{chickenId}/egg")
+    public ResponseDto<Boolean> getEggFromChicken(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long chickenId) {
+        return ResponseDto.success(chickenService.getEggFromChicken(userDetails.getUser(), chickenId));
     }
 }

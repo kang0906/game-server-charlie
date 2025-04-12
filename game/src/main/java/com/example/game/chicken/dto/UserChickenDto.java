@@ -1,11 +1,6 @@
 package com.example.game.chicken.dto;
 
-import com.example.game.chicken.entity.Chicken;
 import com.example.game.chicken.entity.UserChicken;
-import com.example.game.user.entity.User;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -24,7 +19,7 @@ public class UserChickenDto {
         this.userChickenId = userChicken.getUserChickenId();
         this.userId = userChicken.getUser().getUserId();
         this.lastProduceTime = userChicken.getLastProduceTime();
-        this.remainingCapacity = userChicken.getRemainingCapacity();
+        this.remainingCapacity = userChicken.getCurrentEgg();
         this.maxCapacity = userChicken.getMaxCapacity();
     }
 }

@@ -26,4 +26,14 @@ public class UserItem {
 
     private int quantity;
 
+    public UserItem(User user, Item item, int quantity) {
+        this.user = user;
+        this.item = item;
+        this.quantity = quantity;
+    }
+
+    public int addQuantity(int addQuantity) {
+        this.quantity += addQuantity;
+        return quantity;
+    }
 }
