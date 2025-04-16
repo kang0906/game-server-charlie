@@ -16,4 +16,8 @@ public class UserGameInfo {
     private int maxItem;
     private int money;
     private int eggCount;
+
+    public void addEggCount(int amount) {
+        eggCount += amount;
+    }
 }

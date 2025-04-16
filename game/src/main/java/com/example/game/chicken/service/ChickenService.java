@@ -8,6 +8,7 @@ import com.example.game.item.entity.Item;
 import com.example.game.item.entity.UserItem;
 import com.example.game.item.repository.UserItemRepository;
 import com.example.game.user.entity.User;
+import com.example.game.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class ChickenService {
 
     private final UserChickenRepository userChickenRepository;
     private final UserItemRepository userItemRepository;
+    private final UserRepository userRepository;
 
     public UserChickenListDto getChickenList(User user) {
         List<UserChicken> userChickenList = userChickenRepository.findAllByUser(user);
@@ -34,6 +36,8 @@ public class ChickenService {
 
     @Transactional
     public boolean getEggFromChicken(User user, Long chickenId) {
+        user = userRepository.findById(user.getUserId())
+                .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));;
         UserChicken userChicken = userChickenRepository.findById(chickenId)
                 .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
 
@@ -50,6 +54,7 @@ public class ChickenService {
             } else {
                 userItemRepository.save(new UserItem(user, produceItem, 1));
             }
+            user.getUserGameInfo().addEggCount(1);
             return true;
         }
 
