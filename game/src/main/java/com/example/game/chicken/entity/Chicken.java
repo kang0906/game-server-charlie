@@ -25,8 +25,9 @@ public class Chicken {
     private int maxEggCapacity;
     private int eggProduceSpeedSec;
 
-    public Chicken(String chickenName, int maxEggCapacity) {
+    public Chicken(String chickenName, int maxEggCapacity, int eggProduceSpeedSec) {
         this.chickenName = chickenName;
         this.maxEggCapacity = maxEggCapacity;
+        this.eggProduceSpeedSec = eggProduceSpeedSec;
     }
 }

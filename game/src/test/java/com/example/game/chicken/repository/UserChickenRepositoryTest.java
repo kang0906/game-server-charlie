@@ -31,7 +31,7 @@ class UserChickenRepositoryTest {
     void findTopByUserTest() {
         // given
         User user = userRepository.save(new User("user-email", 0L, "username", "password"));
-        Chicken chicken = chickenRepository.save(new Chicken("test-chicken", 5));
+        Chicken chicken = chickenRepository.save(new Chicken("test-chicken", 5, 10));
         UserChicken userChicken = userChickenRepository.save(new UserChicken(user, chicken));
 
         // when
@@ -48,8 +48,8 @@ class UserChickenRepositoryTest {
     void findAllByUserTest() {
         // given
         User user = userRepository.save(new User("user-email", 0L, "username", "password"));
-        Chicken chicken = chickenRepository.save(new Chicken("test-chicken", 5));
-        Chicken chicken2 = chickenRepository.save(new Chicken("test-chicken", 10));
+        Chicken chicken = chickenRepository.save(new Chicken("test-chicken", 5, 10));
+        Chicken chicken2 = chickenRepository.save(new Chicken("test-chicken", 10, 10));
         UserChicken userChicken = userChickenRepository.save(new UserChicken(user, chicken));
         UserChicken userChicken2 = userChickenRepository.save(new UserChicken(user, chicken2));
 

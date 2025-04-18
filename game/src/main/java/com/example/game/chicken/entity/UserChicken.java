@@ -38,8 +38,7 @@ public class UserChicken {
         this.currentEgg = chicken.getMaxEggCapacity();
         this.maxCapacity = chicken.getMaxEggCapacity();
     }
-    public UserChicken(Long userChickenId, User user, Chicken chicken, LocalDateTime lastProduceTime, int currentEgg, int maxCapacity) {
-        this.userChickenId = userChickenId;
+    public UserChicken(User user, Chicken chicken, LocalDateTime lastProduceTime, int currentEgg, int maxCapacity) {
         this.user = user;
         this.chicken = chicken;
         this.lastProduceTime = lastProduceTime;
