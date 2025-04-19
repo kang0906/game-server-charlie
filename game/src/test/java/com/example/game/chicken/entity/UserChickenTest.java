@@ -42,7 +42,7 @@ class UserChickenTest {
             "39, 1, 4", // 기존에 생성가능 1개가 있는 상태에서 최대 개수 - 1 만큼 생성 (경계값)
             "60, 0, 5" // 최대개수 이상 생성할 수 있는 시간의 경우 최대 개수만큼 생성
     })
-    void findTopByUserTest(int elapsedTime, int beforeEggCount, int afterEggCount) {
+    void addCurrentEggTest(int elapsedTime, int beforeEggCount, int afterEggCount) {
         // given
         User user = userRepository.save(new User("user-email", 0L, "username", "password"));
         Chicken chicken = chickenRepository.save(new Chicken("test-chicken", 5, 10));
