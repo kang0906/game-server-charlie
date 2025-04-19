@@ -1,5 +1,7 @@
 package com.example.game.item.entity;
 
+import com.example.game.common.exception.ErrorCode;
+import com.example.game.common.exception.GlobalException;
 import com.example.game.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -32,8 +34,20 @@ public class UserItem {
         this.quantity = quantity;
     }
 
-    public int addQuantity(int addQuantity) {
-        this.quantity += addQuantity;
+    public int addQuantity(int amount) {
+        if (amount < 0) {
+            throw new GlobalException(ErrorCode.CAN_NOT_USE_NEGATIVE_NUMBER);
+        }
+        this.quantity += amount;
         return quantity;
     }
+
+    public int reduceQuantity(int amount) {
+        if (amount < 0) {
+            throw new GlobalException(ErrorCode.CAN_NOT_USE_NEGATIVE_NUMBER);
+        }
+        this.quantity -= amount;
+        return quantity;
+    }
+
 }
