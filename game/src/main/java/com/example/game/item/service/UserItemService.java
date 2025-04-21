@@ -1,6 +1,7 @@
 package com.example.game.item.service;
 
 import com.example.game.common.exception.GlobalException;
+import com.example.game.item.entity.ItemType;
 import com.example.game.item.entity.UserItem;
 import com.example.game.item.repository.UserItemRepository;
 import com.example.game.user.entity.User;
@@ -38,7 +39,9 @@ public class UserItemService {
         }
 
         userItem.reduceQuantity(amount);
-        // todo : 아이템 타입 체크 -> 달걀일 경우 유저의 달걀 소유 개수 감소
+        if (userItem.getItem().getItemType() == ItemType.EGG) {
+            user.getUserGameInfo().reduceEggCount(amount);
+        }
 
         user.getUserGameInfo().addMoney(userItem.getItem().getPrice() * amount);
 

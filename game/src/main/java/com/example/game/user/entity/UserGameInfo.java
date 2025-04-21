@@ -26,6 +26,13 @@ public class UserGameInfo {
         eggCount += amount;
     }
 
+    public void reduceEggCount(int amount) {
+        if (amount < 0) {
+            throw new GlobalException(ErrorCode.CAN_NOT_USE_NEGATIVE_NUMBER);
+        }
+        eggCount -= amount;
+    }
+
     public void addMoney(int amount) {
         if (amount < 0) {
             throw new GlobalException(ErrorCode.CAN_NOT_USE_NEGATIVE_NUMBER);
