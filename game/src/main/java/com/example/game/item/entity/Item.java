@@ -22,4 +22,12 @@ public class Item {
     private String description;
     private int price;
     private int basePrice;
+
+    public Item(String name, ItemType itemType, String description, int price, int basePrice) {
+        this.name = name;
+        this.itemType = itemType;
+        this.description = description;
+        this.price = price;
+        this.basePrice = basePrice;
+    }
 }

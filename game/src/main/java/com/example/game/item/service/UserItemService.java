@@ -24,7 +24,6 @@ public class UserItemService {
 
     @Transactional
     public String itemSell(User user, Long itemId, int amount) {
-        log.info("itemId = {}, amount = {}",itemId, amount);
         UserItem userItem = userItemRepository.findById(itemId)
                 .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
         user = userRepository.findById(user.getUserId())
