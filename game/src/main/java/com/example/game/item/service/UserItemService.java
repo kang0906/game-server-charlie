@@ -1,6 +1,7 @@
 package com.example.game.item.service;
 
 import com.example.game.common.exception.GlobalException;
+import com.example.game.item.dto.UserItemListResponseDto;
 import com.example.game.item.entity.ItemType;
 import com.example.game.item.entity.UserItem;
 import com.example.game.item.repository.UserItemRepository;
@@ -10,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static com.example.game.common.exception.ErrorCode.*;
 
@@ -45,5 +48,10 @@ public class UserItemService {
         user.getUserGameInfo().addMoney(userItem.getItem().getPrice() * amount);
 
         return "success";
+    }
+
+    public UserItemListResponseDto itemList(User user) {
+        List<UserItem> userItemList = userItemRepository.findAllByUser(user);
+        return new UserItemListResponseDto(userItemList);
     }
 }
