@@ -1,6 +1,7 @@
 package com.example.game.item.service;
 
 import com.example.game.common.exception.GlobalException;
+import com.example.game.item.dto.ItemSellResponseDto;
 import com.example.game.item.dto.UserItemListResponseDto;
 import com.example.game.item.entity.ItemType;
 import com.example.game.item.entity.UserItem;
@@ -26,7 +27,7 @@ public class UserItemService {
     private final UserRepository userRepository;
 
     @Transactional
-    public String itemSell(User user, Long itemId, int amount) {
+    public ItemSellResponseDto itemSell(User user, Long itemId, int amount) {
         UserItem userItem = userItemRepository.findById(itemId)
                 .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
         user = userRepository.findById(user.getUserId())
@@ -45,9 +46,10 @@ public class UserItemService {
             user.getUserGameInfo().reduceEggCount(amount);
         }
 
-        user.getUserGameInfo().addMoney(userItem.getItem().getPrice() * amount);
+        int totalSellAmount = userItem.getItem().getPrice() * amount;
+        user.getUserGameInfo().addMoney(totalSellAmount);
 
-        return "success";
+        return new ItemSellResponseDto(user.getUserGameInfo().getMoney(), totalSellAmount);
     }
 
     public UserItemListResponseDto itemList(User user) {

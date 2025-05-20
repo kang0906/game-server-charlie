@@ -3,10 +3,6 @@ package com.example.game.item.dto;
 import com.example.game.item.entity.Item;
 import com.example.game.item.entity.ItemType;
 import com.example.game.item.entity.UserItem;
-import com.example.game.user.entity.User;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
