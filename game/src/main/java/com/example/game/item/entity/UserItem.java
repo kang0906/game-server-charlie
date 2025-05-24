@@ -1,5 +1,6 @@
 package com.example.game.item.entity;
 
+import com.example.game.common.entity.BaseEntity;
 import com.example.game.common.exception.ErrorCode;
 import com.example.game.common.exception.GlobalException;
 import com.example.game.user.entity.User;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "USER_ITEM")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserItem {
+public class UserItem extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package com.example.game.chicken.entity;
 
+import com.example.game.common.entity.BaseEntity;
 import com.example.game.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -13,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 @Getter
 @Table(name = "USER_CHICKEN")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserChicken {
+public class UserChicken extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
