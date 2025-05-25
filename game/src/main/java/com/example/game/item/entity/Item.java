@@ -30,4 +30,8 @@ public class Item {
         this.price = price;
         this.basePrice = basePrice;
     }
+
+    protected void setPrice(int newPrice) {
+        this.price = newPrice;
+    }
 }
