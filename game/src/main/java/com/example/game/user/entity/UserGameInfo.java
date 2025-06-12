@@ -39,4 +39,18 @@ public class UserGameInfo {
         }
         money += amount;
     }
+
+    public void useMoney(int amount) {
+        if (amount < 0) {
+            throw new GlobalException(ErrorCode.CAN_NOT_USE_NEGATIVE_NUMBER);
+        }
+        if(amount > money) {
+            throw new GlobalException(ErrorCode.NOT_ENOUGH_MONEY);
+        }
+        money -= amount;
+    }
+
+    public void increaseMaxChicken() {
+        ++maxChicken;
+    }
 }

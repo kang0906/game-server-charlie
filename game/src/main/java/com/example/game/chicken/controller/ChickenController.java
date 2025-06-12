@@ -26,4 +26,9 @@ public class ChickenController {
     public ResponseDto<Boolean> getEggFromChicken(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long chickenId) {
         return ResponseDto.success(chickenService.getEggFromChicken(userDetails.getUser(), chickenId));
     }
+
+    @PostMapping("/chicken/limit/increase")
+    public ResponseDto<String> increaseChickenLimit(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return ResponseDto.success(chickenService.increaseChickenLimit(userDetails.getUser()));
+    }
 }

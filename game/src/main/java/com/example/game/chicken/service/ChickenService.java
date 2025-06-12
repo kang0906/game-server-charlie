@@ -37,7 +37,7 @@ public class ChickenService {
     @Transactional
     public boolean getEggFromChicken(User user, Long chickenId) {
         user = userRepository.findById(user.getUserId())
-                .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));;
+                .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
         UserChicken userChicken = userChickenRepository.findById(chickenId)
                 .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
 
@@ -59,5 +59,20 @@ public class ChickenService {
         }
 
         return false;
+    }
+
+    @Transactional
+    public String increaseChickenLimit(User user) {
+        user = userRepository.findById(user.getUserId())
+                .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
+
+        if (user.getUserGameInfo().getMaxChicken() >= 20) {
+            user.getUserGameInfo().useMoney(100000000);
+        } else {
+            int price = (int)Math.pow(2, user.getUserGameInfo().getMaxChicken()) * 100;
+            user.getUserGameInfo().useMoney(price);
+        }
+        user.getUserGameInfo().increaseMaxChicken();
+        return "success";
     }
 }
