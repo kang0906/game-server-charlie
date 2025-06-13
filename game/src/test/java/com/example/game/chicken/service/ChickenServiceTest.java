@@ -4,6 +4,8 @@ import com.example.game.chicken.entity.Chicken;
 import com.example.game.chicken.entity.UserChicken;
 import com.example.game.chicken.repository.ChickenRepository;
 import com.example.game.chicken.repository.UserChickenRepository;
+import com.example.game.common.exception.ErrorCode;
+import com.example.game.common.exception.GlobalException;
 import com.example.game.item.entity.UserItem;
 import com.example.game.item.repository.UserItemRepository;
 import com.example.game.user.entity.User;
@@ -73,4 +75,42 @@ class ChickenServiceTest {
 
         Assertions.assertThat(userItem.getQuantity()).isEqualTo(afterItemQuantity);
     }
+
+    @DisplayName("유저 닭 최대치 확장 비용 증가 식 검증")
+    @Test
+    void increaseChickenLimitPriceTest() {
+        // given
+        User user = userRepository.save(new User("user-email", 0L, "username", "password"));
+        user.getUserGameInfo().useMoney(100);   // user.getMoney() == 400
+        // when then
+        for (int i = 2; i < 20; i++) {
+            chickenService.increaseChickenLimit(user);
+
+            Assertions.assertThat(user.getUserGameInfo().getMoney()).isEqualTo(0);
+            Assertions.assertThat(user.getUserGameInfo().getMaxChicken()).isEqualTo(i+1);
+
+            user.getUserGameInfo().addMoney((int)Math.pow(2, i+1) * 100);
+        }
+
+        user.getUserGameInfo().useMoney((int)Math.pow(2, 20) * 100);
+        user.getUserGameInfo().addMoney(100000000);
+        chickenService.increaseChickenLimit(user);
+        Assertions.assertThat(user.getUserGameInfo().getMoney()).isEqualTo(0);
+        Assertions.assertThat(user.getUserGameInfo().getMaxChicken()).isEqualTo(21);
+    }
+
+    @DisplayName("")
+    @Test
+    void increaseChickenLimitNotEnoughMoneyTest() {
+        // given
+        User user = userRepository.save(new User("user-email", 0L, "username", "password"));
+        user.getUserGameInfo().useMoney(101);   // user.getMoney() == 399
+
+        // when then
+        Assertions.assertThatThrownBy(() ->
+                        chickenService.increaseChickenLimit(user))
+                .isInstanceOf(GlobalException.class)
+                .hasMessage(ErrorCode.NOT_ENOUGH_MONEY.getMessage());
+    }
+
 }
