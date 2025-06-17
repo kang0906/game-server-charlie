@@ -31,4 +31,9 @@ public class ChickenController {
     public ResponseDto<String> increaseChickenLimit(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return ResponseDto.success(chickenService.increaseChickenLimit(userDetails.getUser()));
     }
+
+    @GetMapping("/chicken/limit/increase")
+    public ResponseDto<Integer> getChickenLimitIncreasePrice(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return ResponseDto.success(chickenService.getChickenLimitIncreasePrice(userDetails.getUser()));
+    }
 }

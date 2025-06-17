@@ -66,13 +66,20 @@ public class ChickenService {
         user = userRepository.findById(user.getUserId())
                 .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
 
-        if (user.getUserGameInfo().getMaxChicken() >= 20) {
-            user.getUserGameInfo().useMoney(100000000);
-        } else {
-            int price = (int)Math.pow(2, user.getUserGameInfo().getMaxChicken()) * 100;
-            user.getUserGameInfo().useMoney(price);
-        }
+        user.getUserGameInfo().useMoney(getChickenLimitIncreasePrice(user));
         user.getUserGameInfo().increaseMaxChicken();
+
         return "success";
+    }
+
+    public int getChickenLimitIncreasePrice(User user) {
+        user = userRepository.findById(user.getUserId())
+                .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
+
+        if (user.getUserGameInfo().getMaxChicken() >= 20) {
+            return 100000000;
+        } else {
+            return (int)Math.pow(2, user.getUserGameInfo().getMaxChicken()) * 100;
+        }
     }
 }

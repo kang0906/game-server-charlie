@@ -99,7 +99,7 @@ class ChickenServiceTest {
         Assertions.assertThat(user.getUserGameInfo().getMaxChicken()).isEqualTo(21);
     }
 
-    @DisplayName("")
+    @DisplayName("유저 닭 최대치 확장 비용 부족 시 예외발생")
     @Test
     void increaseChickenLimitNotEnoughMoneyTest() {
         // given
