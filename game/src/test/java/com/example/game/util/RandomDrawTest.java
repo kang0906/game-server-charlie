@@ -36,6 +36,36 @@ class RandomDrawTest {
         System.out.println("whiteChickenCount = " + whiteChickenCount);
         System.out.println("brownChickenCount = " + brownChickenCount);
         System.out.println("goldenChickenCount = " + goldenChickenCount);
+    }
+
+    @DisplayName("랜덤 뽑기 확률 누락(기본 반환 객체 반환 케이스) 테스트")
+    @Test
+    void randomDrawProbabilityMissTest() {
+        RandomDraw<Chicken> randomDraw = new RandomDraw<>();
+
+        randomDraw.putItemToList(new Chicken("White Chicken", 0, 0), 500);
+        randomDraw.putItemToList(new Chicken("Brown Chicken", 0, 0), 250);
+        randomDraw.putItemToList(new Chicken("Golden Chicken", 0, 0), 50);
+
+        int whiteChickenCount = 0;
+        int brownChickenCount = 0;
+        int goldenChickenCount = 0;
+
+        for (int i = 0; i < 1000; i++) {
+            Chicken chicken = randomDraw.getItem();
+
+            if (chicken.getChickenName().equals("White Chicken")) {
+                whiteChickenCount++;
+            } else if (chicken.getChickenName().equals("Brown Chicken")) {
+                brownChickenCount++;
+            } else if (chicken.getChickenName().equals("Golden Chicken")) {
+                goldenChickenCount++;
+            }
+        }
+
+        System.out.println("whiteChickenCount = " + whiteChickenCount);
+        System.out.println("brownChickenCount = " + brownChickenCount);
+        System.out.println("goldenChickenCount = " + goldenChickenCount);
 
     }
 

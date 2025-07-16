@@ -8,10 +8,16 @@ import java.util.Random;
 public class RandomDraw<T> {
     private Map<Integer, T> itemList = new HashMap<>();
     private T defaultItem;
+    private int defaultItemProbability;
     private Random random = new Random();
 
     public void putItemToList(T item, int probability) {
         itemList.put(probability, item);
+
+        if (probability > defaultItemProbability || defaultItem == null) {
+            defaultItem = item;
+            defaultItemProbability = probability;
+        }
     }
 
     public T getItem() {
@@ -20,7 +26,7 @@ public class RandomDraw<T> {
 
         for (Integer integer : itemList.keySet()) {
             cumulativeProbability += integer;
-            if(rand <= cumulativeProbability) {
+            if (rand <= cumulativeProbability) {
                 return itemList.get(integer);
             }
         }
