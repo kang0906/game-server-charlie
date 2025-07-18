@@ -33,4 +33,10 @@ public class RandomDraw<T> {
 
         return defaultItem;
     }
+
+    public void reset() {
+        defaultItem = null;
+        defaultItemProbability = 0;
+        itemList = new HashMap<>();
+    }
 }

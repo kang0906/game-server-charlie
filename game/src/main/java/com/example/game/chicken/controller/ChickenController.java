@@ -36,4 +36,9 @@ public class ChickenController {
     public ResponseDto<Integer> getChickenLimitIncreasePrice(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return ResponseDto.success(chickenService.getChickenLimitIncreasePrice(userDetails.getUser()));
     }
+
+    @PostMapping("/chicken/buy")
+    public ResponseDto<Boolean> buyChicken(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return ResponseDto.success(chickenService.buyChicken(userDetails.getUser()));
+    }
 }

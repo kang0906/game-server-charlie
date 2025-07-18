@@ -24,10 +24,18 @@ public class Chicken {
     private String chickenName;
     private int maxEggCapacity;
     private int eggProduceSpeedSec;
+    private int randomDrawProbability;
 
     public Chicken(String chickenName, int maxEggCapacity, int eggProduceSpeedSec) {
         this.chickenName = chickenName;
         this.maxEggCapacity = maxEggCapacity;
         this.eggProduceSpeedSec = eggProduceSpeedSec;
+    }
+
+    public Chicken(String chickenName, int maxEggCapacity, int eggProduceSpeedSec, int randomDrawProbability) {
+        this.chickenName = chickenName;
+        this.maxEggCapacity = maxEggCapacity;
+        this.eggProduceSpeedSec = eggProduceSpeedSec;
+        this.randomDrawProbability = randomDrawProbability;
     }
 }

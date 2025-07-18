@@ -28,6 +28,7 @@ public class ChickenService {
     private final UserChickenRepository userChickenRepository;
     private final UserItemRepository userItemRepository;
     private final UserRepository userRepository;
+    private final ChickenRandomDraw chickenRandomDraw;
 
     public UserChickenListDto getChickenList(User user) {
         List<UserChicken> userChickenList = userChickenRepository.findAllByUser(user);
@@ -81,5 +82,15 @@ public class ChickenService {
         } else {
             return (int)Math.pow(2, user.getUserGameInfo().getMaxChicken()) * 100;
         }
+    }
+
+    @Transactional
+    public boolean buyChicken(User user) {
+        user = userRepository.findById(user.getUserId())
+                .orElseThrow(() -> new GlobalException(DATA_NOT_FOUND));
+
+        user.getUserGameInfo().useMoney(10000); // todo : DB에 가격 저장 후 가져오도록 변경
+        userChickenRepository.save(new UserChicken(user ,chickenRandomDraw.getRandomChicken()));
+        return true;
     }
 }
