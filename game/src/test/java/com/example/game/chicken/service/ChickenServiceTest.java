@@ -37,6 +37,8 @@ class ChickenServiceTest {
     private UserItemRepository userItemRepository;
     @Autowired
     private ChickenService chickenService;
+    @Autowired
+    private ChickenRandomDrawV1 chickenRandomDrawV1;
 
     @DisplayName("기존 아이템이 없을 경우 달걀 생성 테스트")
     @Test
@@ -111,6 +113,28 @@ class ChickenServiceTest {
                         chickenService.increaseChickenLimit(user))
                 .isInstanceOf(GlobalException.class)
                 .hasMessage(ErrorCode.NOT_ENOUGH_MONEY.getMessage());
+    }
+
+    @DisplayName("닭 랜덤뽑기 구매 테스트 ")
+    @Test
+    void chickenBuyTest() {
+        // given
+        chickenRepository.save(new Chicken("White Chicken", 0, 0, 500));
+        chickenRepository.save(new Chicken("Brown Chicken", 0, 0, 450));
+        chickenRepository.save(new Chicken("Golden Chicken", 0, 0, 50));
+        chickenRandomDrawV1.init();
+        User user = userRepository.save(new User("user-email", 0L, "username", "password"));
+        user.getUserGameInfo().addMoney(10000);
+
+        // when
+        chickenService.buyChicken(user);
+
+        // then
+        Assertions.assertThat(user.getUserGameInfo().getMoney())
+                .isEqualTo(500);
+        Assertions.assertThat(userChickenRepository.findAllByUser(user).size())
+                .isEqualTo(1);
+
     }
 
 }
